@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RockPaperScissors.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            return new ObjectResult("Hello world");
+            return View();
         }
     }
 }
