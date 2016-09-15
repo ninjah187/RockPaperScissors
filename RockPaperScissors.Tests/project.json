@@ -1,0 +1,14 @@
+﻿{
+  "version": "1.0.0",
+
+  "dependencies": {
+    "Microsoft.NETCore.App": "1.0.0",
+    "xUnit": "2.2.0-beta2-build3300",
+    "Moq": "4.6.38-alpha",
+    "RockPaperScissors": "*"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {}
+  }
+}
