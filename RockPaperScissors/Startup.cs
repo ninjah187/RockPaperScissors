@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using RockPaperScissors.Services;
 
 namespace RockPaperScissors
@@ -12,7 +13,10 @@ namespace RockPaperScissors
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=RockPaperScissorsDb;Trusted_Connection=true";
+
             services
+                .AddDbContext<AppDbContext>(options => options.UseSqlServer(connection))
                 .AddScoped<IPlayerService, PlayerService>()
                 .AddMvc();
         }
