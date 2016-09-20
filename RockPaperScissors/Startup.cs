@@ -13,7 +13,7 @@ namespace RockPaperScissors
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddScoped<IPlayerService, PlayerService>();
+                .AddScoped<IPlayerService, PlayerService>()
                 .AddMvc();
         }
 
