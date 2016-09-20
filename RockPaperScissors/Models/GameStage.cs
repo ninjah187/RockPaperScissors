@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissors.Models
 {
-    public class GameStage
+    public class GameStage : IModelEntity
     {
         public int Id { get; set; }
 
