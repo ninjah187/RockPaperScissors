@@ -55,13 +55,32 @@ namespace RockPaperScissors.Tests
             await _dbContext.SaveChangesAsync();
 
             var players = await _service.GetAllAsync();
-
-            Assert.NotEmpty(players);
+            
             Assert.Equal(playersCount, players.Count());
             foreach (var player in inputPlayers)
             {
                 Assert.True(players.Contains(player));
             }
+        }
+
+        [Fact]
+        public async Task Get_ThereIsNoSuchPlayer_ReturnsNull()
+        {
+            var player = await _service.GetAsync(-1);
+
+            Assert.Null(player);
+        }
+
+        [Fact]
+        public async Task Get_ThereIsSuchPlayer_ReturnsPlayer()
+        {
+            var player = new Player();
+            _dbContext.Players.Add(player);
+            await _dbContext.SaveChangesAsync();
+
+            var result = await _service.GetAsync(player.Id);
+
+            Assert.Equal(player, result);
         }
     }
 }

@@ -18,5 +18,8 @@ namespace RockPaperScissors.Services
 
         public async Task<IEnumerable<Player>> GetAllAsync()
             => await _dbContext.Players.ToListAsync();
+
+        public async Task<Player> GetAsync(int id)
+            => await _dbContext.Players.FirstOrDefaultAsync();
     }
 }
