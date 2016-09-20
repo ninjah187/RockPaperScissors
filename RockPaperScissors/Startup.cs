@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using RockPaperScissors.Services;
 
 namespace RockPaperScissors
 {
@@ -11,7 +12,9 @@ namespace RockPaperScissors
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services
+                .AddScoped<IPlayerService, PlayerService>();
+                .AddMvc();
         }
 
         public void Configure(IApplicationBuilder app)

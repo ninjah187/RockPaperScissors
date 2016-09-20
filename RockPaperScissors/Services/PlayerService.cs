@@ -7,7 +7,7 @@ using RockPaperScissors.Models;
 
 namespace RockPaperScissors.Services
 {
-    public class PlayerService
+    public class PlayerService : IPlayerService
     {
         AppDbContext _dbContext;
 
