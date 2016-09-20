@@ -12,7 +12,7 @@ namespace RockPaperScissors.Tests
     public class HomeControllerTest
     {
         [Fact]
-        public void HomeController_Index_ReturnsView()
+        public void Index_ReturnsView()
         {
             var controller = new HomeController();
 
