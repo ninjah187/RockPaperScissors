@@ -1,1 +1,1 @@
-﻿var app = angular.module('rockPaperScissorsApp', []);
+﻿var rockPaperScissorsApp = angular.module('rockPaperScissorsApp', []);
