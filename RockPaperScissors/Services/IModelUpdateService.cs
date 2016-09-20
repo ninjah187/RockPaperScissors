@@ -9,7 +9,7 @@ namespace RockPaperScissors.Services
     /// <summary>
     /// Service which updates model entity values.
     /// </summary>
-    public interface IModelUpdateService<in TModel> where TModel : class, IModelEntity
+    public interface IModelUpdateService<in TModel> where TModel : class
     {
         /// <summary>
         /// Rewrites properties values from <paramref name="newItem"/> to <paramref name="originalItem"/>.
@@ -20,7 +20,7 @@ namespace RockPaperScissors.Services
     }
 
     /// <summary>
-    /// Service which updates model entity values.
+    /// Service which updates <see cref="IModelEntity"/> values.
     /// </summary>
     public interface IModelUpdateService : IModelUpdateService<IModelEntity>
     {

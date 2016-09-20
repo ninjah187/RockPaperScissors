@@ -11,7 +11,7 @@ namespace RockPaperScissors.Services
     /// Default service which updates all properties using reflection.
     /// </summary>
     public class ModelUpdateService<TModel> : IModelUpdateService<TModel>
-        where TModel : class, IModelEntity
+        where TModel : class
     {
         static readonly Dictionary<Type, PropertyInfo[]> _cache = new Dictionary<Type, PropertyInfo[]>
         {
@@ -25,9 +25,9 @@ namespace RockPaperScissors.Services
         /// </summary>
         /// <param name="originalItem">Item that will receive new values.</param>
         /// <param name="newItem">Item that will write its values to the second one.</param>
-        public void Update(TModel updatedItem, TModel newItem)
+        public void Update(TModel originalItem, TModel newItem)
         {
-            var modelType = typeof(TModel);
+            var modelType = newItem.GetType();
 
             PropertyInfo[] properties = null;
             
@@ -43,18 +43,18 @@ namespace RockPaperScissors.Services
 
             foreach (var property in properties)
             {
-                if (!property.CanWrite || property.Name == nameof(updatedItem.Id))
+                if (!property.CanWrite)
                 {
                     continue;
                 }
 
-                property.SetValue(updatedItem, property.GetValue(newItem));
+                property.SetValue(originalItem, property.GetValue(newItem));
             }
         }
     }
 
     /// <summary>
-    /// Default service which updates all properties using reflection.
+    /// Default service which updates all <see cref="IModelEntity"/> properties using reflection.
     /// </summary>
     public class ModelUpdateService : ModelUpdateService<IModelEntity>
     {
