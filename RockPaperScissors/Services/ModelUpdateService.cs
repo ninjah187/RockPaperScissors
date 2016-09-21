@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Reflection;
 using RockPaperScissors.Models;
@@ -13,12 +14,7 @@ namespace RockPaperScissors.Services
     public class ModelUpdateService<TModel> : IModelUpdateService<TModel>
         where TModel : class
     {
-        static readonly Dictionary<Type, PropertyInfo[]> _cache = new Dictionary<Type, PropertyInfo[]>
-        {
-            { typeof(Game), typeof(Game).GetProperties() },
-            { typeof(GameStage), typeof(GameStage).GetProperties() },
-            { typeof(Player), typeof(Player).GetProperties() }
-        };
+        static readonly Dictionary<Type, Accessor[]> _cache = new Dictionary<Type, Accessor[]>();
 
         /// <summary>
         /// Rewrites properties values from <paramref name="newItem"/> to <paramref name="originalItem"/>.
@@ -29,27 +25,36 @@ namespace RockPaperScissors.Services
         {
             var modelType = newItem.GetType();
 
-            PropertyInfo[] properties = null;
+            Accessor[] accessors = null;
             
             if (_cache.ContainsKey(modelType))
             {
-                properties = _cache[modelType];
+                accessors = _cache[modelType];
             }
             else
             {
-                properties = modelType.GetProperties();
-                _cache.Add(modelType, properties);
+                accessors = originalItem.GetAccessors().ToArray();
+                _cache.Add(modelType, accessors);
             }
 
-            foreach (var property in properties)
+            foreach (var accessor in accessors)
             {
-                if (!property.CanWrite)
-                {
-                    continue;
-                }
-
-                property.SetValue(originalItem, property.GetValue(newItem));
+                accessor.Setter(originalItem, accessor.Getter(newItem));
             }
+        }
+
+        public Action<TType, TProperty> GetSetter<TType, TProperty>(MethodInfo setMethod)
+        {
+            var parameterTType = Expression.Parameter(typeof(TType), "TType");
+            var parameterTProperty = Expression.Parameter(typeof(TProperty), "TProperty");
+
+            var expression = Expression.Lambda<Action<TType, TProperty>>(
+                        Expression.Call(parameterTType, setMethod, parameterTProperty),
+                        parameterTType,
+                        parameterTProperty
+                    );
+
+            return expression.Compile();
         }
     }
 

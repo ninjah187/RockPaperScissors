@@ -54,7 +54,7 @@ namespace RockPaperScissors.Benchmarks
             stopwatch.Start();
             foreach (var data in _testDataSet)
             {
-                _withCache.Update(data.Item1, data.Item2);
+                _withoutCache.Update(data.Item1, data.Item2);
             }
             stopwatch.Stop();
             Console.WriteLine($"> \tresult: {stopwatch.Elapsed}");
