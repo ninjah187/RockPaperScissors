@@ -14,7 +14,7 @@ namespace RockPaperScissors.Benchmarks
 
         List<Tuple<TestEntity, TestEntity>> _testDataSet = new List<Tuple<TestEntity, TestEntity>>();
 
-        ModelUpdateService _withCache = new ModelUpdateService();
+        ModelUpdateService _withCache = new ModelUpdateService(new AccessorsProvider());
         ModelUpdateServiceWithoutCache _withoutCache = new ModelUpdateServiceWithoutCache();
 
         public void Run(int repetitions)

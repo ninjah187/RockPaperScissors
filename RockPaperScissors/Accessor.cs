@@ -12,6 +12,17 @@ namespace RockPaperScissors
         public new Func<TType, TProperty> Getter { get; }
         public new Action<TType, TProperty> Setter { get; }
 
+        public Accessor(IReadAccessor<TType, TProperty> readAccessor,
+                        IWriteAccessor<TType, TProperty> writeAccessor)
+            : base(
+                      @object => readAccessor.Getter((TType) @object),
+                      (@object, property) => writeAccessor.Setter((TType) @object, (TProperty) property)
+                  )
+        {
+            Getter = readAccessor.Getter;
+            Setter = writeAccessor.Setter;
+        }
+
         public Accessor(MethodInfo getMethod, MethodInfo setMethod)
         {
             Getter = GetGetter(getMethod);
@@ -21,9 +32,9 @@ namespace RockPaperScissors
             base.Setter = (@object, property) => Setter((TType) @object, (TProperty) property);
         }
 
-        protected static Func<TType, TProperty> GetGetter(MethodInfo getMethod)
+        public static Func<TType, TProperty> GetGetter(MethodInfo getMethod)
         {
-            var parameterTType = Expression.Parameter(typeof(TType), "TType");
+            var parameterTType = Expression.Parameter(typeof(TType), "propertyType");
 
             var expression = Expression.Lambda<Func<TType, TProperty>>(
                         Expression.Call(parameterTType, getMethod),
@@ -35,8 +46,8 @@ namespace RockPaperScissors
 
         protected static Action<TType, TProperty> GetSetter(MethodInfo setMethod)
         {
-            var parameterTType = Expression.Parameter(typeof(TType), "TType");
-            var parameterTProperty = Expression.Parameter(typeof(TProperty), "TProperty");
+            var parameterTType = Expression.Parameter(typeof(TType), "objectType");
+            var parameterTProperty = Expression.Parameter(typeof(TProperty), "propertyType");
 
             var expression = Expression.Lambda<Action<TType, TProperty>>(
                         Expression.Call(parameterTType, setMethod, parameterTProperty),
@@ -52,5 +63,15 @@ namespace RockPaperScissors
     {
         public Func<object, object> Getter { get; protected set; }
         public Action<object, object> Setter { get; protected set; }
+
+        public Accessor()
+        {
+        }
+
+        public Accessor(Func<object, object> getter, Action<object, object> setter)
+        {
+            Getter = getter;
+            Setter = setter;
+        }
     }
 }

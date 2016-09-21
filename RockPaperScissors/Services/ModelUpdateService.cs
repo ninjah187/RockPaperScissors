@@ -14,7 +14,14 @@ namespace RockPaperScissors.Services
     public class ModelUpdateService<TModel> : IModelUpdateService<TModel>
         where TModel : class
     {
-        static readonly Dictionary<Type, Accessor[]> _cache = new Dictionary<Type, Accessor[]>();
+        static readonly Dictionary<Type, IAccessor[]> _cache = new Dictionary<Type, IAccessor[]>();
+
+        IAccessorsProvider _accessorsProvider;
+
+        public ModelUpdateService(IAccessorsProvider accessorsProvider)
+        {
+            _accessorsProvider = accessorsProvider;
+        }
 
         /// <summary>
         /// Rewrites properties values from <paramref name="newItem"/> to <paramref name="originalItem"/>.
@@ -25,7 +32,7 @@ namespace RockPaperScissors.Services
         {
             var modelType = newItem.GetType();
 
-            Accessor[] accessors = null;
+            IAccessor[] accessors = null;
             
             if (_cache.ContainsKey(modelType))
             {
@@ -33,7 +40,7 @@ namespace RockPaperScissors.Services
             }
             else
             {
-                accessors = originalItem.GetAccessors().ToArray();
+                accessors = _accessorsProvider.GetAccessors(originalItem).ToArray();
                 _cache.Add(modelType, accessors);
             }
 
@@ -42,20 +49,6 @@ namespace RockPaperScissors.Services
                 accessor.Setter(originalItem, accessor.Getter(newItem));
             }
         }
-
-        public Action<TType, TProperty> GetSetter<TType, TProperty>(MethodInfo setMethod)
-        {
-            var parameterTType = Expression.Parameter(typeof(TType), "TType");
-            var parameterTProperty = Expression.Parameter(typeof(TProperty), "TProperty");
-
-            var expression = Expression.Lambda<Action<TType, TProperty>>(
-                        Expression.Call(parameterTType, setMethod, parameterTProperty),
-                        parameterTType,
-                        parameterTProperty
-                    );
-
-            return expression.Compile();
-        }
     }
 
     /// <summary>
@@ -63,5 +56,9 @@ namespace RockPaperScissors.Services
     /// </summary>
     public class ModelUpdateService : ModelUpdateService<IModelEntity>
     {
+        public ModelUpdateService(IAccessorsProvider accessorsProvider)
+            : base(accessorsProvider)
+        {
+        }
     }
 }

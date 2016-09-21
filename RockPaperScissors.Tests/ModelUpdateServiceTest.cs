@@ -9,13 +9,14 @@ using RockPaperScissors.Models;
 
 namespace RockPaperScissors.Tests
 {
-    public class ModelUpdateServiceTest
+    public abstract class ModelUpdateServiceTest
     {
+        //Mock<IAccessorsProvider>
         ModelUpdateService _service;
 
         public ModelUpdateServiceTest()
         {
-            _service = new ModelUpdateService();
+            //_service = new ModelUpdateService();
         }
 
         [Fact]
