@@ -9,14 +9,15 @@ using RockPaperScissors.Models;
 
 namespace RockPaperScissors.Tests
 {
-    public abstract class ModelUpdateServiceTest
+    public class ModelUpdateServiceTest
     {
-        //Mock<IAccessorsProvider>
+        Mock<IAccessorsProvider> _accessorsProviderMock;
         ModelUpdateService _service;
 
         public ModelUpdateServiceTest()
         {
-            //_service = new ModelUpdateService();
+            _accessorsProviderMock = new Mock<IAccessorsProvider>();
+            _service = new ModelUpdateService(_accessorsProviderMock.Object);
         }
 
         [Fact]
@@ -43,13 +44,79 @@ namespace RockPaperScissors.Tests
                 Structure = DateTime.MaxValue
             };
 
+            var testEntityAccessorsMocks = GetAccessorsMocks(originalModel, newModel);
+            var testEntityAccessors = testEntityAccessorsMocks.Select(m => m.Object).ToList();
+
+            _accessorsProviderMock
+                .Setup(m => m.GetAccessors(It.Is<Type>(t => t == typeof(TestEntity))))
+                .Returns(testEntityAccessors);
+
             _service.Update(originalModel, newModel);
+
+            _accessorsProviderMock.VerifyAll();
+            foreach (var accessorMock in testEntityAccessorsMocks)
+            {
+                accessorMock.Verify();
+            }
 
             Assert.Equal(newModel.Id, originalModel.Id);
             Assert.Equal(newModel.Int, originalModel.Int);
             Assert.Equal(newModel.String, originalModel.String);
             Assert.Equal(newModel.Reference, originalModel.Reference);
             Assert.Equal(newModel.Structure, originalModel.Structure);
+        }
+
+        IEnumerable<Mock<IAccessor>> GetAccessorsMocks(TestEntity originalModel, TestEntity newModel)
+        {
+            var idAccessorMock = new Mock<IAccessor>();
+            idAccessorMock
+                .SetupGet(m => m.Getter)
+                .Returns(x => ((TestEntity) x).Id);
+            idAccessorMock
+                .SetupGet(m => m.Setter)
+                .Returns((x, value) => ((TestEntity)x).Id = (int)value);
+
+            yield return idAccessorMock;
+
+            var intAccessorMock = new Mock<IAccessor>();
+            intAccessorMock
+                .SetupGet(m => m.Getter)
+                .Returns(x => ((TestEntity)x).Int);
+            idAccessorMock
+                .SetupGet(m => m.Setter)
+                .Returns((x, value) => ((TestEntity)x).Int = (int)value);
+
+            yield return intAccessorMock;
+
+            var stringAccessorMock = new Mock<IAccessor>();
+            stringAccessorMock
+                .SetupGet(m => m.Getter)
+                .Returns(x => ((TestEntity)x).String);
+            idAccessorMock
+                .SetupGet(m => m.Setter)
+                .Returns((x, value) => ((TestEntity)x).String = (string)value);
+
+            yield return stringAccessorMock;
+
+            var referenceAccessorMock = new Mock<IAccessor>();
+            referenceAccessorMock
+                .SetupGet(m => m.Getter)
+                .Returns(x => ((TestEntity)x).Reference);
+            referenceAccessorMock
+                .SetupGet(m => m.Setter)
+                .Returns((x, value) => ((TestEntity)x).Reference = (TestEntity)value);
+
+            yield return referenceAccessorMock;
+
+            var valueAccessorMock = new Mock<IAccessor>();
+            valueAccessorMock
+                .SetupGet(m => m.Getter)
+                .Returns(x => ((TestEntity)x).Structure);
+            valueAccessorMock
+                .SetupGet(m => m.Setter)
+                .Returns((x, value) => ((TestEntity)x).Structure = (DateTime)value);
+
+            yield return valueAccessorMock;
         }
     }
 }

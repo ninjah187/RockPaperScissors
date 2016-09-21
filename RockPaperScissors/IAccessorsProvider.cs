@@ -8,7 +8,7 @@ namespace RockPaperScissors
 {
     public interface IAccessorsProvider
     {
-        IEnumerable<IAccessor> GetAccessors<T>(T item);
+        IEnumerable<IAccessor> GetAccessors(Type objectType);
 
         IReadAccessor<TType, TProperty> GetReadAccessor<TType, TProperty>(MethodInfo getMethod);
         IReadAccessor GetReadAccessor(Type objectType, Type propertyType, MethodInfo getMethod);

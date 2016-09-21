@@ -30,6 +30,9 @@ namespace RockPaperScissors.Services
         /// <param name="newItem">Item that will write its values to the second one.</param>
         public void Update(TModel originalItem, TModel newItem)
         {
+            if (originalItem == null) throw new ArgumentNullException(nameof(originalItem));
+            if (newItem == null) throw new ArgumentNullException(nameof(newItem));
+
             var modelType = newItem.GetType();
 
             IAccessor[] accessors = null;
@@ -40,7 +43,7 @@ namespace RockPaperScissors.Services
             }
             else
             {
-                accessors = _accessorsProvider.GetAccessors(originalItem).ToArray();
+                accessors = _accessorsProvider.GetAccessors(modelType).ToArray();
                 _cache.Add(modelType, accessors);
             }
 
