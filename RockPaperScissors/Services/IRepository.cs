@@ -14,6 +14,6 @@ namespace RockPaperScissors.Services
         Task<int> CountAsync();
         Task CreateAsync(TModel item);
         Task UpdateAsync(TModel item);
-        Task DeleteAsync(TModel item);
+        Task DeleteAsync(int id);
     }
 }

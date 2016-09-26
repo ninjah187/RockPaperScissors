@@ -75,14 +75,13 @@ namespace RockPaperScissors.Tests
             idAccessorMock
                 .SetupGet(m => m.Setter)
                 .Returns((x, value) => ((TestEntity)x).Id = (int)value);
-
             yield return idAccessorMock;
 
             var intAccessorMock = new Mock<IAccessor>();
             intAccessorMock
                 .SetupGet(m => m.Getter)
                 .Returns(x => ((TestEntity)x).Int);
-            idAccessorMock
+            intAccessorMock
                 .SetupGet(m => m.Setter)
                 .Returns((x, value) => ((TestEntity)x).Int = (int)value);
 
@@ -92,7 +91,7 @@ namespace RockPaperScissors.Tests
             stringAccessorMock
                 .SetupGet(m => m.Getter)
                 .Returns(x => ((TestEntity)x).String);
-            idAccessorMock
+            stringAccessorMock
                 .SetupGet(m => m.Setter)
                 .Returns((x, value) => ((TestEntity)x).String = (string)value);
 
