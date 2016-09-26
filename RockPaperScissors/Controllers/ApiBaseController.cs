@@ -51,6 +51,7 @@ namespace RockPaperScissors.Controllers
             try
             {
                 await Repository.CreateAsync(item);
+                await Repository.CommitAsync();
             }
             catch (Exception ex) when (ex is ArgumentException ||
                                        ex is ArgumentNullException)
@@ -75,6 +76,7 @@ namespace RockPaperScissors.Controllers
             try
             {
                 await Repository.UpdateAsync(item);
+                await Repository.CommitAsync();
             }
             catch (Exception ex) when (ex is InvalidOperationException)
             {
@@ -88,6 +90,7 @@ namespace RockPaperScissors.Controllers
         public virtual async Task<IActionResult> Delete(int id)
         {
             await Repository.DeleteAsync(id);
+            await Repository.CommitAsync();
 
             return NoContent();
         }

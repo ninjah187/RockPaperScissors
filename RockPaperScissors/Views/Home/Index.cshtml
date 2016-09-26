@@ -8,10 +8,15 @@
 </head>
 <body ng-app="rockPaperScissorsApp">
     <div ng-controller="gameController">
-        <p>{{helloWorldData}}</p>
+        <ul>
+            <li ng-repeat="game in games">
+                <p>id: {{game.id}}; token: {{game.token}}</p>
+            </li>
+        </ul>
     </div>
 
     <script src="/scripts/app/rockPaperScissorsApp.js"></script>
     <script src="/scripts/app/controllers/gameController.js"></script>
+    <script src="/scripts/app/services/gameFactory.js"></script>
 </body>
 </html>

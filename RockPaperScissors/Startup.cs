@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using RockPaperScissors.Services;
 using RockPaperScissors.Models;
 
@@ -19,7 +20,6 @@ namespace RockPaperScissors
             services
                 .AddDbContext<AppDbContext>(options => options.UseSqlServer(connection))
                 .AddScoped<DbContext, AppDbContext>()
-                //.AddScoped<DbContext>()
                 .AddScoped<IPlayerService, PlayerService>()
                 .AddScoped<IRepository<Game>, Repository<Game>>()
                 .AddScoped<IRepository<GameStage>, Repository<GameStage>>()
@@ -27,6 +27,12 @@ namespace RockPaperScissors
                 .AddSingleton<IAccessorsProvider, AccessorsProvider>()
                 .AddSingleton<IModelUpdateService, ModelUpdateService>()
                 .AddMvc();
+
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            };
         }
 
         public void Configure(IApplicationBuilder app)
