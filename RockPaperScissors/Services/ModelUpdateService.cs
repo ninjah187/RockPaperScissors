@@ -57,7 +57,7 @@ namespace RockPaperScissors.Services
     /// <summary>
     /// Default service which updates all <see cref="IModelEntity"/> properties using reflection.
     /// </summary>
-    public class ModelUpdateService : ModelUpdateService<IModelEntity>
+    public class ModelUpdateService : ModelUpdateService<IModelEntity>, IModelUpdateService
     {
         public ModelUpdateService(IAccessorsProvider accessorsProvider)
             : base(accessorsProvider)

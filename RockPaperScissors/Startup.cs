@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using RockPaperScissors.Services;
+using RockPaperScissors.Models;
 
 namespace RockPaperScissors
 {
@@ -17,7 +18,14 @@ namespace RockPaperScissors
 
             services
                 .AddDbContext<AppDbContext>(options => options.UseSqlServer(connection))
+                .AddScoped<DbContext, AppDbContext>()
+                //.AddScoped<DbContext>()
                 .AddScoped<IPlayerService, PlayerService>()
+                .AddScoped<IRepository<Game>, Repository<Game>>()
+                .AddScoped<IRepository<GameStage>, Repository<GameStage>>()
+                .AddScoped<IRepository<Player>, Repository<Player>>()
+                .AddSingleton<IAccessorsProvider, AccessorsProvider>()
+                .AddSingleton<IModelUpdateService, ModelUpdateService>()
                 .AddMvc();
         }
 
