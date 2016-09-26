@@ -5,8 +5,21 @@ function gameFactory($http) {
         return $http.get('/api/games/' + gameId);
     }
 
+    function createNewGame(player, chosenShape) {
+        var data = {
+            playerName: player.name,
+            chosenShape: chosenShape.value
+        };
+
+        return $http.post('/api/newGame', {
+            playerName: player.name,
+            chosenShape: chosenShape.value
+        });
+    }
+
     var service = {
-        getGame: getGame
+        getGame: getGame,
+        createNewGame: createNewGame
     };
 
     return service;

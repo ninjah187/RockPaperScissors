@@ -1,0 +1,14 @@
+﻿<h1>New game</h1>
+<form>
+    Your name: <input type="text" ng-model="player.name" /><br />
+
+    Your choice:
+    <select ng-model="chosenShape" ng-options="shape.name for shape in shapes">
+
+    </select>
+    <br />
+
+    <input type="button" ng-click="clearData()" value="clear"/>
+
+    <input type="submit" ng-click="createNewGame(player, chosenShape)" value="new game"/>
+</form>

@@ -21,11 +21,14 @@ namespace RockPaperScissors
                 .AddDbContext<AppDbContext>(options => options.UseSqlServer(connection))
                 .AddScoped<DbContext, AppDbContext>()
                 .AddScoped<IPlayerService, PlayerService>()
+                .AddScoped<IGamesRepository, GamesRepository>()
                 .AddScoped<IRepository<Game>, Repository<Game>>()
                 .AddScoped<IRepository<GameStage>, Repository<GameStage>>()
                 .AddScoped<IRepository<Player>, Repository<Player>>()
                 .AddSingleton<IAccessorsProvider, AccessorsProvider>()
                 .AddSingleton<IModelUpdateService, ModelUpdateService>()
+                .AddSingleton<IAccessCodeGenerator, AccessCodeGenerator>()
+                .AddScoped<IGameService, GameService>()
                 .AddMvc();
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings

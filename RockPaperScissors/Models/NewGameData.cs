@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissors.Models
 {
-    public enum Figure
+    public class NewGameData
     {
-        None,
-        Rock,
-        Paper,
-        Scissors
+        public string PlayerName { get; set; }
+        public Shape ChosenShape { get; set; }
     }
 }

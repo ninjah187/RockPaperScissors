@@ -12,7 +12,7 @@ namespace RockPaperScissors.Controllers
 {
     public class GamesController : ApiBaseController<Game>
     {
-        public GamesController(IRepository<Game> repository)
+        public GamesController(IGamesRepository repository)
             : base(repository)
         {
         }
