@@ -3,19 +3,25 @@
 <head>
     <meta charset="utf-8">
     <title>Rock Paper Scissors</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 </head>
 <body ng-app="rockPaperScissorsApp">
-    <div ng-controller="gameController">
+    @*<div ng-controller="gameController">
         <ul>
             <li ng-repeat="game in games">
                 <p>id: {{game.id}}; token: {{game.token}}</p>
             </li>
         </ul>
+    </div>*@
+
+    <div ng-view>
+
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
     <script src="/scripts/app/rockPaperScissorsApp.js"></script>
+    <script src="/scripts/app/controllers/gamesController.js"></script>
+    <script src="/scripts/app/services/gamesFactory.js"></script>
     <script src="/scripts/app/controllers/gameController.js"></script>
     <script src="/scripts/app/services/gameFactory.js"></script>
 </body>

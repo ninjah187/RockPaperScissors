@@ -1,11 +1,15 @@
-﻿rockPaperScissorsApp.controller('gameController', ['$scope', 'gameFactory', gameController]);
+﻿rockPaperScissorsApp.controller('gameController', ['$scope', '$routeParams', 'gameFactory', gameController]);
 
-function gameController($scope, gameFactory) {
-    $scope.games = [];
+function gameController($scope, $routeParams, gameFactory) {
+    $scope.game = {};
 
-    gameFactory.getGames().success(function (data) {
-        $scope.games = data;
-    }).error(function (error) {
-        console.log(error);
-    });
+    var gameId = $routeParams.gameId;
+
+    gameFactory.getGame(gameId)
+        .success(function (data) {
+            $scope.game = data;
+        })
+        .error(function (error) {
+            console.log(error);
+        });
 }

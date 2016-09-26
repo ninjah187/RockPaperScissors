@@ -1,12 +1,12 @@
 ﻿rockPaperScissorsApp.factory('gameFactory', ['$http', gameFactory]);
 
 function gameFactory($http) {
-    function getGames() {
-        return $http.get('/api/games');
+    function getGame(gameId) {
+        return $http.get('/api/games/' + gameId);
     }
 
     var service = {
-        getGames: getGames
+        getGame: getGame
     };
 
     return service;

@@ -38,9 +38,11 @@ namespace RockPaperScissors
         public void Configure(IApplicationBuilder app)
         {
             app
+                .UseStatusCodePages()
                 .UseDeveloperExceptionPage()
                 .UseStaticFiles()
                 .UseMvcWithDefaultRoute();
+                //.UseMvc();
         }
     }
 }
