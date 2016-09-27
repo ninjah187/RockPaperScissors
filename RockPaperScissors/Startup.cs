@@ -29,6 +29,7 @@ namespace RockPaperScissors
                 .AddSingleton<IModelUpdateService, ModelUpdateService>()
                 .AddSingleton<IAccessCodeGenerator, AccessCodeGenerator>()
                 .AddScoped<IGameService, GameService>()
+                .AddScoped<IGameSearchService, GameSearchService>()
                 .AddMvc();
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings

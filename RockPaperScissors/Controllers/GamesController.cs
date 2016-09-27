@@ -10,11 +10,19 @@ using RockPaperScissors.Models;
 
 namespace RockPaperScissors.Controllers
 {
-    public class GamesController : ApiBaseController<Game>
-    {
-        public GamesController(IGamesRepository repository)
-            : base(repository)
-        {
-        }
-    }
+    //public class GamesController : ApiBaseController<Game>
+    //{
+    //    public GamesController(IGamesRepository repository)
+    //        : base(repository)
+    //    {
+    //    }
+    //}
+
+    //public class GamesController : Controller
+    //{
+    //    public Task<IActionResult> Get(int gameId, string accessCode)
+    //    {
+
+    //    }
+    //}
 }

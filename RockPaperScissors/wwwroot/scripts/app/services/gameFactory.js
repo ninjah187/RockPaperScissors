@@ -17,9 +17,15 @@ function gameFactory($http) {
         });
     }
 
+    function searchGame(gameSearch) {
+        return $http.post('/api/gameSearch', gameSearch);
+    }
+
     var service = {
         getGame: getGame,
-        createNewGame: createNewGame
+        createNewGame: createNewGame,
+        searchGame: searchGame,
+        currentGame: {}
     };
 
     return service;

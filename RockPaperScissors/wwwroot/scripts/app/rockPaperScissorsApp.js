@@ -7,13 +7,17 @@ rockPaperScissorsApp.config(['$routeProvider',
                 templateUrl: '/scripts/app/partials/mainMenu.html',
                 controller: 'mainMenuController'
             })
+            .when('/gameSearch', {
+                templateUrl: '/scripts/app/partials/gameSearch.html',
+                controller: 'gameSearchController'
+            })
             .when('/newGame', {
                 templateUrl: '/scripts/app/partials/newGame.html',
                 controller: 'newGameController'
             })
-            .when('/games', {
-                templateUrl: '/scripts/app/partials/games.html',
-                controller: 'gamesController'
+            .when('/game', {
+                templateUrl: '/scripts/app/partials/game.html',
+                controller: 'gameController'
             })
             .when('/games/:gameId', {
                 templateUrl: '/scripts/app/partials/game.html',

@@ -5,7 +5,11 @@ function navigationService($location) {
         $location.path('newGame');
     };
 
-    this.goToGame = function (gameId) {
-        $location.path('games/' + gameId);
+    this.goToGameSearch = function () {
+        $location.path('gameSearch');
     };
+
+    this.goToCurrentGame = (function () {
+        $location.path('game');
+    });
 }
