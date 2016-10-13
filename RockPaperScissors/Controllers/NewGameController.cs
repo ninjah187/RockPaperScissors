@@ -23,9 +23,26 @@ namespace RockPaperScissors.Controllers
         {
             var game = await _gameService.CreateNewGameAsync(newGame);
 
+            //var result = new
+            //{
+            //    Id = game.Id,
+            //    Player = new
+            //    {
+            //        Name = game.Player1.Name,
+            //        AccessCode = game.Player1.AccessCode
+            //    },
+            //    ChosenShape = game.Stages.First().Player1Choice
+            //};
+
+            var result = new
+            {
+                Id = game.Id,
+                AccessCode = game.Player1.AccessCode
+            };
+
             return CreatedAtRoute(
                     new { controller = "Games", action = "Get" },
-                    game
+                    result
                 );
         }
     }

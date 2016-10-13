@@ -14,7 +14,7 @@ function newGameController($scope, navigationService, gameFactory, shapesFactory
     $scope.createNewGame = function (player, chosenShape) {
         gameFactory.createNewGame(player, chosenShape)
             .success(function (game) {
-                navigationService.goToGame(game.Id);
+                navigationService.goToGame(game.id, game.accessCode);
             })
             .error(function (error) {
                 console.log(error);

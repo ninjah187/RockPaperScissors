@@ -5,6 +5,14 @@ function gameFactory($http) {
         return $http.get('/api/games/' + gameId);
     }
 
+    function getGame(gameId, accessCode) {
+        var resource = '/api/games/' + gameId;
+        if (accessCode) {
+            resource += '/' + accessCode;
+        }
+        return $http.get(resource);
+    }
+
     function createNewGame(player, chosenShape) {
         var data = {
             playerName: player.name,

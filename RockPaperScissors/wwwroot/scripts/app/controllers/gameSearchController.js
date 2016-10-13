@@ -1,15 +1,14 @@
-﻿rockPaperScissorsApp.controller('gameSearchController', ['$scope', 'navigationService', 'gameFactory', searchGameController]);
+﻿rockPaperScissorsApp.controller('gameSearchController', ['$scope', 'navigationService', 'gameFactory', gameSearchController]);
 
-function searchGameController($scope, navigationService, gameFactory) {
-    $scope.gameSearch = {};
-    $scope.search = function (gameSearch) {
-        gameFactory.searchGame(gameSearch)
-            .success(function (gameData) {
-                gameFactory.currentGame = gameData;
-                navigationService.goToCurrentGame();
-            })
-            .error(function (error) {
-                console.log(error);
-            });
+function gameSearchController($scope, navigationService, gameFactory) {
+    $scope.search = function (gameId) {
+        navigationService.goToGame(gameId);
+        //gameFactory.searchGame(gameId)
+        //    .success(function (gameData) {
+                
+        //    })
+        //    .error(function (error) {
+        //        console.log(error);
+        //    });
     };
 }
