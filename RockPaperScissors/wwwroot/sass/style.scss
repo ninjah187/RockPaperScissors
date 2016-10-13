@@ -1,5 +1,124 @@
 ﻿$fontStack: 'Segoe UI', sans-serif;
 
+$primaryColor: #eaeaea;
+$secondaryColor: #181818;
+$additionalColor1: #4f4f4f;
+$accentColor: #00a8ff;
+$okColor: #541d1c;
+$badColor: #2c341c;
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin transform-scale($scale) {
+    transform: scale($scale);
+    -webkit-transform: scale($scale);
+    -moz-transform: scale($scale);
+    -o-transform: scale($scale);
+}
+
+@mixin transition-ease($duration) {
+    -webkit-transition: $duration ease;
+    -moz-transition: $duration ease;
+    -o-transition: $duration ease;
+}
+
+@mixin box-shadow() {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 170, 255, 1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 170, 255, 1);
+    box-shadow: 0px 0px 5px 0px rgba(0, 170, 255, 1);
+}
+
+@import '_button.scss';
+@import '_navigation.scss';
+
 body {
     font-family: $fontStack;
+    background: $primaryColor;
+    color: $secondaryColor;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.title-container {
+    padding: 10px 0;
+    display: inline-block;
+}
+
+.title {
+    @extend .text-center;
+    font-size: 64px;
+    padding: 0;
+    margin: 0;
+}
+
+.title-description {
+    text-transform: uppercase;
+    color: $additionalColor1;
+    font-size: 24px;
+}
+
+.title-underline {
+    width: 0%;
+    animation: title-underline-reveal 1s ease;
+    animation-fill-mode: forwards;
+    height: 10px;
+    background: $accentColor;
+    border: none;
+}
+
+.content {
+    opacity: 0;
+    animation: menu-reveal 1s ease 0.5s;
+    animation-fill-mode: forwards;
+}
+
+form {
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+input {
+    width: 30%;
+    font-size: 18px;
+    text-align: center;
+    @include border-radius(10px);
+    border: none;
+    padding: 5px;
+    margin: 10px auto;
+    opacity: 0.8;
+    @include transition-ease(0.5s);
+}
+
+input:active, input:focus {
+    opacity: 1;
+    @include box-shadow();
+}
+
+@keyframes title-underline-reveal {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 70%;
+    }
+}
+
+@keyframes menu-reveal {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

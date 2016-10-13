@@ -1,5 +1,23 @@
-﻿<h1>Menu</h1>
-<ul>
-    <li><button ng-click="navigation.goToNewGameCreation()">New game</button></li>
-    <li><button ng-click="navigation.goToGameSearch()">Search game</button></li>
-</ul>
+﻿<div class="title-container">
+    <h1 class="title">Rock Paper Scissors</h1>
+    <hr class="title-underline" />
+</div>
+
+<nav class="content">
+    <ul>
+        <!--<li><button ng-click="navigation.goToNewGameCreation()" class="btn">New game</button></li>
+        <li><button ng-click="navigation.goToGameSearch()" class="btn">Search game</button></li>-->
+        <li>
+            <div class="alt-btn">
+                <button ng-click="navigation.goToNewGameCreation()">New game</button>
+                <hr />
+            </div>
+        </li>
+        <li>
+            <div class="alt-btn">
+                <button ng-click="navigation.goToGameSearch()">Search game</button>
+                <hr />
+            </div>
+        </li>
+    </ul>
+</nav>
