@@ -20,6 +20,9 @@ function newGameController($scope, navigationService, gameFactory, shapesFactory
                 console.log(error);
             });
     };
+    $scope.$on('$viewContentLoaded', function () {
+        focusElementModule.focus();
+    });
 
     $scope.clearData();
 }

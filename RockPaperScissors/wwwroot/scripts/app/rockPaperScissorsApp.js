@@ -22,7 +22,7 @@ rockPaperScissorsApp.config(['$routeProvider',
             .when('/games/:gameId/:accessCode', {
                 templateUrl: '/scripts/app/partials/game.html',
                 controller: 'gameController'
-            })
+            });
             //.when('/game', {
             //    templateUrl: '/scripts/app/partials/game.html',
             //    controller: 'gameController'
