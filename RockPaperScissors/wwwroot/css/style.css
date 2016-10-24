@@ -137,27 +137,25 @@ form {
   font-size: 24px;
   text-transform: uppercase;
   font-weight: 700; }
-
-input {
-  width: 30%;
-  font-size: 18px;
-  text-align: center;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 3px;
-  border-color: transparent;
-  padding: 5px;
-  margin: 10px auto;
-  opacity: 0.8;
-  -webkit-transition: 0.5s ease;
-  -moz-transition: 0.5s ease;
-  -o-transition: 0.5s ease; }
-
-input:active, input:focus {
-  border-color: #00a8ff; }
+  form .text-input {
+    width: 30%;
+    font-size: 18px;
+    text-align: center;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: transparent;
+    padding: 5px;
+    margin: 10px auto;
+    opacity: 0.8;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -o-transition: 0.5s ease; }
+  form .text-input:active, form .text-input:focus {
+    border-color: #00a8ff; }
 
 @keyframes title-underline-reveal {
   0% {

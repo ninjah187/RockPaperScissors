@@ -5,19 +5,11 @@
 
 <nav class="content">
     <ul>
-        <!--<li><button ng-click="navigation.goToNewGameCreation()" class="btn">New game</button></li>
-        <li><button ng-click="navigation.goToGameSearch()" class="btn">Search game</button></li>-->
         <li>
-            <div class="alt-btn">
-                <button ng-click="navigation.goToNewGameCreation()">New game</button>
-                <hr />
-            </div>
+            <primary-button text="new game" ng-click="navigation.goToNewGameCreation()"></primary-button>
         </li>
         <li>
-            <div class="alt-btn">
-                <button ng-click="navigation.goToGameSearch()">Search game</button>
-                <hr />
-            </div>
+            <primary-button text="search game" ng-click="navigation.goToGameSearch()"></primary-button>
         </li>
     </ul>
 </nav>

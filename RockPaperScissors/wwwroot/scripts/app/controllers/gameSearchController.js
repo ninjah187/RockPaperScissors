@@ -11,4 +11,7 @@ function gameSearchController($scope, navigationService, gameFactory) {
         //        console.log(error);
         //    });
     };
+    $scope.$on('$viewContentLoaded', function () {
+        focusElementModule.focus();
+    });
 }

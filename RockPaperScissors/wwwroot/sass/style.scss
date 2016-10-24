@@ -90,24 +90,24 @@ form {
     font-size: 24px;
     text-transform: uppercase;
     font-weight: 700;
-}
 
-input {
-    width: 30%;
-    font-size: 18px;
-    text-align: center;
-    @include border-radius(10px);
-    border-style: solid;
-    border-width: 3px;
-    border-color: rgba(0, 0, 0, 0);
-    padding: 5px;
-    margin: 10px auto;
-    opacity: 0.8;
-    @include transition-ease(0.5s);
-}
+    .text-input {
+        width: 30%;
+        font-size: 18px;
+        text-align: center;
+        @include border-radius(10px);
+        border-style: solid;
+        border-width: 3px;
+        border-color: rgba(0, 0, 0, 0);
+        padding: 5px;
+        margin: 10px auto;
+        opacity: 0.8;
+        @include transition-ease(0.5s);
+    }
 
-input:active, input:focus {
-    border-color: $accentColor;
+    .text-input:active, .text-input:focus {
+        border-color: $accentColor;
+    }
 }
 
 @keyframes title-underline-reveal {
